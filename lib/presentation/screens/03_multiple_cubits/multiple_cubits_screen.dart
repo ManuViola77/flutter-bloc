@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:blocs_app/presentation/blocs/blocs.dart';
 
+import '../../../config/config.dart';
+
 class MultipleCubitScreen extends StatelessWidget {
   const MultipleCubitScreen({super.key});
 
@@ -10,6 +12,7 @@ class MultipleCubitScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final counterCubit = context.watch<CounterCubit>();
     final themeCubit = context.watch<ThemeCubit>();
+    final usernameCubit = context.watch<UsernameCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +34,7 @@ class MultipleCubitScreen extends StatelessWidget {
               themeCubit.toggleTheme();
             },
           ),
-          const Text('Fernando Herrera', style: TextStyle(fontSize: 25)),
+          Text(usernameCubit.state, style: const TextStyle(fontSize: 25)),
           TextButton.icon(
             icon: const Icon(
               Icons.add,
@@ -49,7 +52,9 @@ class MultipleCubitScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Nombre aleatorio'),
         icon: const Icon(Icons.refresh_rounded),
-        onPressed: () {},
+        onPressed: () {
+          usernameCubit.setUsername(RandomGenerator.getRandomName());
+        },
       ),
     );
   }
