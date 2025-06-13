@@ -12,6 +12,12 @@ class GuestsState extends Equatable {
 
   const GuestsState({this.filter = GuestsFilter.all, this.guests = const []});
 
+  GuestsState copyWith({
+    GuestsFilter? filter,
+    List<Todo>? guests,
+  }) =>
+      GuestsState(filter: filter ?? this.filter, guests: guests ?? this.guests);
+
   @override
   List<Object> get props => [filter, guests];
 }
