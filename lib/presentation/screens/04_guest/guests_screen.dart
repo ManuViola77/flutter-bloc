@@ -53,10 +53,13 @@ class _TodoView extends StatelessWidget {
         /// Listado de personas a invitar
         Expanded(
           child: ListView.builder(
+            itemCount: guestsBloc.state.howManyFilteredGuests,
             itemBuilder: (context, index) {
+              final guest = guestsBloc.state.filteredGuests[index];
+
               return SwitchListTile(
-                  title: const Text('Juan carlos'),
-                  value: true,
+                  title: Text(guest.description),
+                  value: guest.done,
                   onChanged: (value) {});
             },
           ),
