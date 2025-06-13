@@ -10,6 +10,10 @@ class HistoricLocationBloc
     on<NewLocationEvent>(_handleNewLocation);
   }
 
+  void onNewUserLocation((double lat, double lng) location) {
+    add(NewLocationEvent(location));
+  }
+
   void _handleNewLocation(
       NewLocationEvent event, Emitter<HistoricLocationState> emit) {
     emit(state.copyWith(locations: [...state.locations, event.location]));
