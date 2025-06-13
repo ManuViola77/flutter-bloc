@@ -17,6 +17,7 @@ class BlocsProvider extends StatelessWidget {
       // lazy false es para que se cree el cubit cuando se inicie la app
       BlocProvider(create: (context) => UsernameCubit(), lazy: false),
       BlocProvider(create: (context) => RouterSimpleCubit()),
+      BlocProvider(create: (context) => CounterCubit()),
     ], child: const MyApp());
   }
 }
