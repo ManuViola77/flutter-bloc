@@ -7,7 +7,7 @@ part 'guests_state.dart';
 
 class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
   GuestsBloc() : super(const GuestsState()) {
-    on<SetInvitedFilterEvent>((event, emit) {
+    /* on<SetInvitedFilterEvent>((event, emit) {
       emit(state.copyWith(filter: GuestsFilter.invited));
     });
     on<SetNotInvitedFilterEvent>((event, emit) {
@@ -15,15 +15,15 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     });
     on<SetAllFilterEvent>((event, emit) {
       emit(state.copyWith(filter: GuestsFilter.all));
-    });
+    }); */
     on<SetCustomFilterEvent>((event, emit) {
       emit(state.copyWith(filter: event.customFilter));
     });
   }
 
   void changeFilter(GuestsFilter filter) {
-    // add(SetCustomFilterEvent(filter));
-    switch (filter) {
+    add(SetCustomFilterEvent(filter));
+    /* switch (filter) {
       case GuestsFilter.all:
         add(SetAllFilterEvent());
         break;
@@ -35,6 +35,6 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
       case GuestsFilter.notInvited:
         add(SetNotInvitedFilterEvent());
         break;
-    }
+    } */
   }
 }
