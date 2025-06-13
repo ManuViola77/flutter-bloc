@@ -54,6 +54,17 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     on<SetCustomFilterEvent>((event, emit) {
       emit(state.copyWith(filter: event.customFilter));
     });
+    on<AddGuestEvent>(_handleAddGuest);
+  }
+
+  void _handleAddGuest(AddGuestEvent event, Emitter<GuestsState> emit) {
+    final newGuest =
+        Todo(id: uuid.v4(), description: event.guestName, completedAt: null);
+    emit(state.copyWith(guests: [...state.guests, newGuest]));
+  }
+
+  void addGuest(String guestName) {
+    add(AddGuestEvent(guestName));
   }
 
   void changeFilter(GuestsFilter filter) {
