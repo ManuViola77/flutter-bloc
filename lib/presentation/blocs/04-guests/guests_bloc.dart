@@ -55,6 +55,7 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
       emit(state.copyWith(filter: event.customFilter));
     });
     on<AddGuestEvent>(_handleAddGuest);
+    on<ToggleGuestEvent>(_handleToggleGuest);
   }
 
   void _handleAddGuest(AddGuestEvent event, Emitter<GuestsState> emit) {
@@ -63,8 +64,22 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     emit(state.copyWith(guests: [...state.guests, newGuest]));
   }
 
+  void _handleToggleGuest(ToggleGuestEvent event, Emitter<GuestsState> emit) {
+    final newGuests = state.guests.map((guest) {
+      if (guest.id == event.guestId) {
+        return guest.copyWith(completedAt: guest.done ? null : DateTime.now());
+      }
+      return guest;
+    }).toList();
+    emit(state.copyWith(guests: newGuests));
+  }
+
   void addGuest(String guestName) {
     add(AddGuestEvent(guestName));
+  }
+
+  void toggleGuest(String guestId) {
+    add(ToggleGuestEvent(guestId));
   }
 
   void changeFilter(GuestsFilter filter) {

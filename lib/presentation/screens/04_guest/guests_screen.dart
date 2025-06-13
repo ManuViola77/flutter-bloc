@@ -63,7 +63,9 @@ class _TodoView extends StatelessWidget {
               return SwitchListTile(
                   title: Text(guest.description),
                   value: guest.done,
-                  onChanged: (value) {});
+                  onChanged: (value) {
+                    guestsBloc.toggleGuest(guest.id);
+                  });
             },
           ),
         )
