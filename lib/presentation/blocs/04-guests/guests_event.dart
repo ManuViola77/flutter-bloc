@@ -6,3 +6,15 @@ sealed class GuestsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+final class SetAllFilterEvent extends GuestsEvent {}
+
+final class SetInvitedFilterEvent extends GuestsEvent {}
+
+final class SetNotInvitedFilterEvent extends GuestsEvent {}
+
+final class SetCustomFilterEvent extends GuestsEvent {
+  final GuestsFilter customFilter;
+
+  const SetCustomFilterEvent(this.customFilter);
+}
