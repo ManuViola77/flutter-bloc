@@ -14,7 +14,8 @@ class BlocsProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => UsernameCubit()),
+      // lazy false es para que se cree el cubit cuando se inicie la app
+      BlocProvider(create: (context) => UsernameCubit(), lazy: false),
     ], child: const MyApp());
   }
 }
